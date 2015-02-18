@@ -160,7 +160,7 @@ window.onload = function()
 		}
 	}
 
-	function gameover()
+	function Winner()
 	{
 		this.game.paused = true;
 		gameoverText = game.add.text(350, 300, 'You win', { fontSize: '128px', fill: '#000' });
