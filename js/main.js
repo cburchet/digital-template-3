@@ -59,6 +59,8 @@ window.onload = function()
 		
 		createBoulders();
 		
+		game.time.events.loop(Phaser.Timer.SECOND * 10, createBoulders, this);
+		
 		createScroll();
 		
 	}
@@ -115,8 +117,8 @@ window.onload = function()
 	var count = 0;
 	function createScroll()
 	{
-		var positions = [50, 750, 200, 600, 400]
-		scroll = scrolls.create(positions[count], game.world.height - 150, 'scroll')
+		var positions = [50, 750, 200, 600, 400, 75, 700, 100, 450]
+		scroll = scrolls.create(positions[count], game.world.height - 120, 'scroll')
 	}
 	
 	function createSaved()
@@ -141,7 +143,6 @@ window.onload = function()
 				//  Let gravity do its thing
 				boulder.body.gravity.y = 25;
 				boulder.body.velocity.x = game.rnd.integerInRange(100,200)
-			//	boulder.lifespan = 8500;
 				boulder.body.collideWorldBounds = true;
 				boulder.body.bounce.set(1);
 			}
@@ -154,7 +155,7 @@ window.onload = function()
 		// Removes the star from the screen
 		scroll.kill();
 		count++;
-		if (count < 5)
+		if (count < 10)
 		{
 			createScroll()
 		}
