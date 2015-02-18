@@ -49,6 +49,7 @@ window.onload = function()
 		
 		cursors = game.input.keyboard.createCursorKeys();
 		
+		
 		boulders = game.add.group();
 		boulders.enableBody = true;
 		
@@ -133,12 +134,17 @@ window.onload = function()
 		{
 			var chance = game.rnd.integerInRange(1,3);
 			if (chance == 2)
+			
 			{
 				boulder = boulders.create(i * 70, game.rnd.integerInRange(100,200), 'boulder');
+				game.physics.enable(boulder, Phaser.Physics.ARCADE);
 				boulder.rotation = game.rnd.integerInRange(1, 5);
 				//  Let gravity do its thing
-				boulder.body.gravity.y = 15;
-			//	boulder.lifespan = 8500;
+				boulder.body.gravity.y = 25;
+				boulder.body.velocity.x = game.rnd.integerInRange(100,200)
+				boulder.lifespan = 8500;
+				boulder.body.collideWorldBounds = true;
+				boulder.body.bounce.set(1);
 			}
 		}
 	}
