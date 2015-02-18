@@ -6,7 +6,8 @@ window.onload = function()
 
 	var player;
 	var cursors;
-    var earth;
+	var earth;
+	var platforms;
 	var rocks;
 	var dogs;
 	var cats;
@@ -34,6 +35,10 @@ window.onload = function()
 		var ground = earth.create(0, game.world.height - 64, 'ground');
 		ground.body.immovable = true;
 		ground.scale.setTo(7, 1);
+		
+		platforms = game.add.group();
+ 
+		platforms.enableBody = true;
 		
 		var ledge = platforms.create(400, 400, 'ground');
  
