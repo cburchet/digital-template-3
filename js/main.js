@@ -5,20 +5,22 @@ window.onload = function()
 	var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
 
 	var player;
+	var girl;
 	var cursors;
 	var earth;
-	var rocks;
-	var score = 0;
-	var scoreText;
-	var timeText;
-	var timer = 120;
+	var boulders;
+	var scrolls;
+	var scroll;
 	var gameoverText; 
 	
 	function preload() 
 	{
 		game.load.image('landscape', 'assets/landscape.png');
 		game.load.image('ground', 'assets/ground.png');
+		game.load.image('boulder', 'assets/boulder/png');
+		game.load.image('scroll', 'assets/scroll.png');
 		game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+		game.load.image('girl', 'assets/static.png');
 	}
 	 
 	function create() 
@@ -46,13 +48,18 @@ window.onload = function()
 		
 		cursors = game.input.keyboard.createCursorKeys();
 		
-		game.time.events.loop(Phaser.Timer.SECOND * 10, createDogs, this);
+		boulders = game.add.group();
+		boulders.enableBody = true;
+		
+		scrolls = game.add.group();
+		scrolls.enableBody = true;
+		
 		
 		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 		
-		timeText = game.add.text(300, 16, 'Time: 2', { fontSize: '32px', fill: '#000' });
+		createBoulders();
 		
-		game.time.events.loop(Phaser.Timer.SECOND, updateTimer, this);
+		createScroll();
 		
 		game.time.events.loop(Phaser.Timer.SECOND * timer, gameover, this);
 	}
@@ -60,10 +67,20 @@ window.onload = function()
 	function update() 
 	{
 		game.physics.arcade.collide(player, earth);
-		game.physics.arcade.collide(dogs, earth);
-		game.physics.arcade.overlap(player, dogs, collectDog, null, this);
-		game.physics.arcade.collide(cats, earth);
-		game.physics.arcade.overlap(player, cats, collectCat, null, this);
+		game.physics.arcade.overlap(boulders, earth, destroyBoulder, null, this);
+		game.physics.arcade.overlap(player, boulders, gameover, null, this);
+		game.physics.arcade.overlap(player, scroll, collectScroll, null, this);
+		game.physics.arcade.overlap(player, girl, Winner, null, this);
+		
+		if (boulders.countLiving() == 0)
+		{
+			createBoulders();
+		}
+		
+		if (scrolls.countLiving() == 0)
+		{
+			createScroll();
+		}
 		
 		player.body.velocity.x = 0;
 	 
@@ -95,20 +112,60 @@ window.onload = function()
 			player.body.velocity.y = -350;
 		}
 	}
+	
+	static var count = 0;
+	function createScroll()
+	{
+		var positions = [50, 750, 200, 600, 400]
+		scroll = scrolls.create(positions[count], 64, 'scroll')
+	}
+	
+	function createSaved()
+	{
+		girl = game.add.sprite(32, game.world.height - 150, 'girl');
+	}
+	
+	function createBoulders()
+	{
+		//create random boulders
+		for (var i = 0; i < 12; i++)
+		{
+			var chance = game.rnd.integerInRange(1,3);
+			if (chance == 2)
+			{
+				var boulder = boulders.create(i * 70, game.rnd.integerInRange(100,200), 'boulder');
+				boulder.rotation = game.rnd.integerInRange(1, 5);
+				//  Let gravity do its thing
+				boulder.body.gravity.y = 15;
+			}
+		}
+	}
+	
+	function destroyBoulder()
+	{
+		boulder.kill();
+	}
 
-	function collectCat (player, cat) 
+	function collectScroll (player, scroll) 
 	{
 		
 		// Removes the star from the screen
-		score -= 10;
-		cat.kill();
-		scoreText.text = 'Score: ' + score;
+		scroll.kill();
+		count++;
+		if (count < 5)
+		{
+			createScroll()
+		}
+		else
+		{
+			createSaved();
+		}
 	}
 
-	function updateTimer()
+	function gameover()
 	{
-		timer--;
-		timeText.text = 'Time: ' + Math.floor(timer/60) + ':' + timer % 60;
+		this.game.paused = true;
+		gameoverText = game.add.text(350, 300, 'You win', { fontSize: '128px', fill: '#000' });
 	}
 	
 	function gameover()
