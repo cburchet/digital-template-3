@@ -66,7 +66,7 @@ window.onload = function()
 	{
 		game.physics.arcade.collide(player, earth);
 		game.physics.arcade.collide(girl, earth);
-		game.physics.arcade.collide(boulders, earth, destroyBoulder, null, this);
+		game.physics.arcade.collide(boulder, earth, destroyBoulder, null, this);
 		game.physics.arcade.overlap(player, boulders, gameover, null, this);
 		game.physics.arcade.overlap(player, scroll, collectScroll, null, this);
 		game.physics.arcade.overlap(player, girl, Winner, null, this);
@@ -138,7 +138,7 @@ window.onload = function()
 				boulder.rotation = game.rnd.integerInRange(1, 5);
 				//  Let gravity do its thing
 				boulder.body.gravity.y = 15;
-				boulder.lifespan = 5000;
+				boulder.lifespan = 10000;
 			}
 		}
 	}
