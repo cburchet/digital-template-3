@@ -7,10 +7,7 @@ window.onload = function()
 	var player;
 	var cursors;
 	var earth;
-	var platforms;
 	var rocks;
-	var dogs;
-	var cats;
 	var score = 0;
 	var scoreText;
 	var timeText;
@@ -21,8 +18,6 @@ window.onload = function()
 	{
 		game.load.image('landscape', 'assets/landscape.png');
 		game.load.image('ground', 'assets/ground.png');
-		game.load.image('dog', 'assets/dog.png');
-		game.load.image('cat', 'assets/cat.png');
 		game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 	}
 	 
@@ -35,18 +30,6 @@ window.onload = function()
 		var ground = earth.create(0, game.world.height - 64, 'ground');
 		ground.body.immovable = true;
 		ground.scale.setTo(7, 1);
-		
-		platforms = game.add.group();
- 
-		platforms.enableBody = true;
-		
-		var ledge = platforms.create(400, 400, 'ground');
- 
-		ledge.body.immovable = true;
- 
-    		ledge = platforms.create(-150, 250, 'ground');
- 
-		  ledge.body.immovable = true;
 		
 		//player
 		player = game.add.sprite(32, game.world.height - 150, 'dude');
@@ -62,17 +45,6 @@ window.onload = function()
 		player.animations.add('right', [5, 6, 7, 8], 10, true);
 		
 		cursors = game.input.keyboard.createCursorKeys();
-		
-		dogs = game.add.group();
-	 
-		dogs.enableBody = true;
-		//dogs.scale.setTo(.5, .5);
-		
-		cats = game.add.group();
-	 
-		cats.enableBody = true;
-		
-		createDogs();
 		
 		game.time.events.loop(Phaser.Timer.SECOND * 10, createDogs, this);
 		
@@ -124,48 +96,6 @@ window.onload = function()
 		}
 	}
 
-	function createDogs()
-	{
-		//create 12 dogs
-		for (var i = 0; i < 12; i++)
-		{
-			var chance = game.rnd.integerInRange(1, 4);
-			if (chance <= 3)
-			{
-				var dog = dogs.create(i * 70, game.rnd.integerInRange(100,200), 'dog');
-				dog.scale.setTo(.5, .5);
-				dog.rotation = game.rnd.integerInRange(1, 5);
-				//  Let gravity do its thing
-				dog.body.gravity.y = game.rnd.integerInRange(10, 25);
-		 
-				//  This just gives each star a slightly random bounce value
-				dog.body.bounce.y = 0.7 + Math.random() * 0.2;
-				dog.lifespan = 10000;
-			}
-			else
-			{
-				var cat = cats.create(i * 70, game.rnd.integerInRange(100,200), 'cat');
-				cat.scale.setTo(.5, .5);
-				cat.rotation = game.rnd.integerInRange(1, 5);
-				//  Let gravity do its thing
-				cat.body.gravity.y = game.rnd.integerInRange(10, 25);
-		 
-				//  This just gives each star a slightly random bounce value
-				cat.body.bounce.y = 0.7 + Math.random() * 0.2;
-				cat.lifespan = 10000;
-			}
-		}
-	}
-
-	function collectDog (player, dog) 
-	{
-		
-		// Removes the star from the screen
-		score += 10;
-		dog.kill();
-		scoreText.text = 'Score: ' + score;
-	}
-	
 	function collectCat (player, cat) 
 	{
 		
