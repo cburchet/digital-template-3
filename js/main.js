@@ -9,6 +9,7 @@ window.onload = function()
 	var cursors;
 	var earth;
 	var boulders;
+	var boulder;
 	var scrolls;
 	var scroll;
 	var gameoverText; 
@@ -131,7 +132,7 @@ window.onload = function()
 			var chance = game.rnd.integerInRange(1,3);
 			if (chance == 2)
 			{
-				var boulder = boulders.create(i * 70, game.rnd.integerInRange(100,200), 'boulder');
+				boulder = boulders.create(i * 70, game.rnd.integerInRange(100,200), 'boulder');
 				boulder.rotation = game.rnd.integerInRange(1, 5);
 				//  Let gravity do its thing
 				boulder.body.gravity.y = 15;
