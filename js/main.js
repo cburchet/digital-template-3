@@ -138,14 +138,14 @@ window.onload = function()
 				boulder.rotation = game.rnd.integerInRange(1, 5);
 				//  Let gravity do its thing
 				boulder.body.gravity.y = 15;
-				boulder.lifespan = 8500;
+			//	boulder.lifespan = 8500;
 			}
 		}
 	}
 	
 	function destroyBoulder()
 	{
-		boulder.kill();
+		boulders.kill();
 	}
 
 	function collectScroll (player, scroll) 
