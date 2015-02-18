@@ -122,6 +122,7 @@ window.onload = function()
 	{
 		girl = game.add.sprite(32, game.world.height - 150, 'girl');
 		game.physics.arcade.enable(girl);
+		girl.body.gravity.y = 300;
 	}
 	
 	function createBoulders()
