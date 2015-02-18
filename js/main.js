@@ -145,7 +145,7 @@ window.onload = function()
 	
 	function destroyBoulder()
 	{
-		boulders.kill();
+		boulder.destroy();
 	}
 
 	function collectScroll (player, scroll) 
