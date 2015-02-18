@@ -113,7 +113,7 @@ window.onload = function()
 		}
 	}
 	
-	static var count = 0;
+	var count = 0;
 	function createScroll()
 	{
 		var positions = [50, 750, 200, 600, 400]
