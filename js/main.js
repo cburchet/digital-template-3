@@ -114,7 +114,7 @@ window.onload = function()
 	function createScroll()
 	{
 		var positions = [50, 750, 200, 600, 400]
-		scroll = scrolls.create(positions[count], game.world.height - 64, 'scroll')
+		scroll = scrolls.create(positions[count], game.world.height - 150, 'scroll')
 	}
 	
 	function createSaved()
