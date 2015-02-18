@@ -53,7 +53,6 @@ window.onload = function()
 		
 		scrolls = game.add.group();
 		scrolls.enableBody = true;
-		scrolls.scale.setTo(.1, .1);
 		
 		
 		createBoulders();
