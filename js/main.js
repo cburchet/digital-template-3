@@ -17,7 +17,7 @@ window.onload = function()
 	{
 		game.load.image('landscape', 'assets/landscape.png');
 		game.load.image('ground', 'assets/ground.png');
-		game.load.image('boulder', 'assets/boulder/png');
+		game.load.image('boulder', 'assets/boulder.png');
 		game.load.image('scroll', 'assets/scroll.png');
 		game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 		game.load.image('girl', 'assets/static.png');
