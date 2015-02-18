@@ -55,13 +55,10 @@ window.onload = function()
 		scrolls.enableBody = true;
 		
 		
-		scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-		
 		createBoulders();
 		
 		createScroll();
 		
-		game.time.events.loop(Phaser.Timer.SECOND * timer, gameover, this);
 	}
 	 
 	function update() 
@@ -123,6 +120,7 @@ window.onload = function()
 	function createSaved()
 	{
 		girl = game.add.sprite(32, game.world.height - 150, 'girl');
+		game.physics.arcade.enable(girl);
 	}
 	
 	function createBoulders()
