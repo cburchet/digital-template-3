@@ -141,6 +141,7 @@ window.onload = function()
 				game.physics.enable(boulder, Phaser.Physics.ARCADE);
 				boulder.rotation = game.rnd.integerInRange(1, 5);
 				//  Let gravity do its thing
+				boulder.anchor.set(.5);
 				boulder.body.gravity.y = 25;
 				boulder.body.velocity.x = game.rnd.integerInRange(100,200)
 				boulder.body.collideWorldBounds = true;
