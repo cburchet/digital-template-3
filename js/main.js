@@ -65,7 +65,8 @@ window.onload = function()
 	function update() 
 	{
 		game.physics.arcade.collide(player, earth);
-		game.physics.arcade.overlap(boulders, earth, destroyBoulder, null, this);
+		game.physics.arcade.collide(girl, earth);
+		game.physics.arcade.collide(boulders, earth, destroyBoulder, null, this);
 		game.physics.arcade.overlap(player, boulders, gameover, null, this);
 		game.physics.arcade.overlap(player, scroll, collectScroll, null, this);
 		game.physics.arcade.overlap(player, girl, Winner, null, this);
