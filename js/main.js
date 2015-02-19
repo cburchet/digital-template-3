@@ -36,6 +36,7 @@ window.onload = function()
 		ground.body.immovable = true;
 		ground.scale.setTo(7, 1);
 		music = game.add.audio('pressure');
+		music.volume = .5;
 		music.play();
 		//player
 		player = game.add.sprite(32, game.world.height - 150, 'dude');
