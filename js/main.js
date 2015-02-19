@@ -22,6 +22,7 @@ window.onload = function()
 		game.load.image('scroll', 'assets/scroll.png');
 		game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 		game.load.image('girl', 'assets/static.png');
+		game.load.audio('pressure', 'assets/Pressure.ogg');
 	}
 	 
 	function create() 
@@ -33,7 +34,8 @@ window.onload = function()
 		var ground = earth.create(0, game.world.height - 64, 'ground');
 		ground.body.immovable = true;
 		ground.scale.setTo(7, 1);
-		
+		music = game.add.audio('pressure');
+		music.play();
 		//player
 		player = game.add.sprite(32, game.world.height - 150, 'dude');
 	 
